@@ -1,0 +1,104 @@
+<script type="text/x-red" data-template-name="kgpparser">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="fa fa-empire"></i> Port</label>
+        <input type="text" id="node-input-port" placeholder="port">
+    </div>
+    <div class="form-row" style="margin-bottom:0;">
+        <label><i class="fa fa-list"></i> Format</span></label>
+    </div>
+    <div class="form-row node-input-rule-container-row">
+        <ol id="node-input-rule-container"></ol>
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('kgpparser', {
+        color: "#E2D96E",
+        category: 'function',
+        defaults: {
+            name: {value:""},
+			port: {value:"", required:true},
+            formats:{value:[""], required:true}     
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "split.png",
+        label: function() {
+            return this.name||"KGp Parser";
+        },
+        oneditprepare: function() {
+            $('#node-input-rule-container').css('min-height','300px').css('min-width','450px').editableList({
+                addItem: function(container,i,opt) {
+                    var format = opt;
+					if (!format.hasOwnProperty('l')) {
+                        format = {v:"bool();", l:"bool"};
+                    }
+                    var row1 = $('<div/>').appendTo(container);
+
+					var selectField = $('<select style="width:30%;">').appendTo(row1);   
+					var selectOptions = [{v:"bool();",l:"bool"},{v:"uint4();",l:"uint4_t"},{v:"uint8();",l:"uint8_t"},{v:"uint16();",l:"uint16_t"},{v:"uint32();",l:"uint32_t"},{v:"int4();",l:"int4_t"},{v:"int8();",l:"int8_t"},{v:"int16();",l:"int16_t"},{v:"int32();",l:"int32_t"},{v:"float();",l:"float"},{v:"string();",l:"string"}];
+
+                    for (var i=0; i<selectOptions.length; i++) {
+                        selectField.append($("<option></option>").val(selectOptions[i].v).text(selectOptions[i].l));
+                    }
+
+                    selectField.val(format.l);
+                    selectField.change();
+                    var newWidth = $("#node-input-rule-container").width();
+                },
+                removable: true,
+                sortable: true
+            });
+
+
+            for (var i=0; i<this.formats.length; i++) {
+                var format = this.formats[i];
+                $("#node-input-rule-container").editableList('addItem',format);
+            }
+
+			if (!this.formats) {
+                var format = {v:"bool();", l:"bool"};
+				this.formats = [format];
+            }
+		},
+		
+
+        oneditsave: function() {
+            var formats = $("#node-input-rule-container").editableList('items');
+            var node = this;
+            node.formats = [];
+            formats.each(function() {
+                var format = $(this);
+                var type = format.find("select").val();
+                var r = {l:type};
+                node.formats.push(r);
+            }); 
+        },
+ 
+        oneditresize: function(size) {
+            var rows = $("#dialog-form>div:not(.node-input-rule-container-row)");
+            var height = size.height;
+            for (var i=0; i<rows.size(); i++) {
+                height -= $(rows[i]).outerHeight(true);
+            }
+            var editorRow = $("#dialog-form>div.node-input-rule-container-row");
+            height -= (parseInt(editorRow.css("marginTop"))+parseInt(editorRow.css("marginBottom")));
+
+            $("#node-input-rule-container").editableList('height',height);
+        }
+	});
+
+</script>
+
+<script type="text/x-red" data-help-name="kgpparser">
+    <p>Parse KashiwaGeeks Payload</p>
+	<p> Payload is a bitstream consist from 1bit-bool and 4bits, 1byte, 2bytes, 4bytes integer or unsinged integer and 4bytes float. This node parses the payload and return the array of values.</p>
+<h3>Details</h3>
+<p>Add a selector and select a format of Payload</p>
+
+
+</script>

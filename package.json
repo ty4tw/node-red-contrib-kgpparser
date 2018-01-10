@@ -1,0 +1,37 @@
+{
+  "name": "node-red-contrib-kgpparser",
+  "version": "0.1.0",
+  "description": "KashiwaGeeks Payload Parser",
+  "main": "kgpparser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "node-red": {
+    "nodes": {
+      "kgpparser": "kgpparser.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ty4tw/node-red-contrib-kgpparser.git"
+  },
+  "keywords": [
+    "node-red",
+    "kgpparser"
+  ],
+  "author": {
+    "name": "ty4tw"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ty4tw/node-red-contrib-parse-kgp/issues"
+  },
+  "homepage": "https://github.com/ty4tw/node-red-contrib-kgpparser#readme",
+  "readme": "# node-red-contrib-split-kgp\nParse KashiwaGeeks Payload\n",
+  "readmeFilename": "README.md",
+  "gitHead": "cd761c227033188b39d3a1a86675b7d69206c0ab",
+  "_id": "node-red-contrib-kgpparser@0.1.0",
+  "_shasum": "f393d31c7c6d296117b45e4379e25bcadd71d335",
+  "_from": "../workspace/git/node-red-contrib-kgpparser",
+  "_resolved": "file:../workspace/git/node-red-contrib-kgpparser"
+}
