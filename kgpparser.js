@@ -157,15 +157,13 @@ module.exports = function(RED)
 
         node.on('input', function(msg) 
 		{
-			var port = msg.payload[0];
-
-			if ( port == this.portNo )
+			if ( msg.port == this.portNo )
 			{
 		        Gpos = 0;
 				gPos = 7;
 				udata = Buffer.alloc(256, 0);
 			
-				var data = msg.payload[1];
+				var data = msg.payload;
 				var len = data.length;
 				var j = 0;
 
@@ -176,8 +174,6 @@ module.exports = function(RED)
 				}
 
 				array = [];
-				array.push(msg.payload[2]);
-				array.push(msg.payload[3]);
 				parsePayload();
 				
 		  		msg.payload = array; 
