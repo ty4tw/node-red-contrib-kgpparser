@@ -95,6 +95,16 @@ module.exports = function(RED)
 			array.push(data.readUInt16BE(0));
 		}
 
+        function uint24()
+		{
+            var val = Buffer.alloc(4, 0);
+			val[0] = 0;
+            val[1] = getBits(8);
+            val[2] = getBits(8);
+            val[3] = getBits(8);           
+            array.push(val.readUInt32BE(0));
+		}
+
 		function uint32()
 		{
 			var data = getData(32);

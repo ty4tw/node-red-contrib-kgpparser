@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-kgpparser",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "KashiwaGeeks Payload Parser",
   "main": "kgpparser.js",
   "scripts": {

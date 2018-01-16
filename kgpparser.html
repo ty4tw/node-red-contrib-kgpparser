@@ -40,7 +40,7 @@
                     var row1 = $('<div/>').appendTo(container);
 
 					var selectField = $('<select style="width:30%;">').appendTo(row1);   
-					var selectOptions = [{v:"bool();",l:"bool"},{v:"uint4();",l:"uint4_t"},{v:"uint8();",l:"uint8_t"},{v:"uint16();",l:"uint16_t"},{v:"uint32();",l:"uint32_t"},{v:"int4();",l:"int4_t"},{v:"int8();",l:"int8_t"},{v:"int16();",l:"int16_t"},{v:"int32();",l:"int32_t"},{v:"float();",l:"float"},{v:"string();",l:"string"}];
+					var selectOptions = [{v:"bool();",l:"bool"},{v:"uint4();",l:"uint4_t"},{v:"uint8();",l:"uint8_t"},{v:"uint16();",l:"uint16_t"},{v:"uint24();",l:"uint24_t"},{v:"uint32();",l:"uint32_t"},{v:"int4();",l:"int4_t"},{v:"int8();",l:"int8_t"},{v:"int16();",l:"int16_t"},{v:"int32();",l:"int32_t"},{v:"float();",l:"float"},{v:"string();",l:"string"}];
 
                     for (var i=0; i<selectOptions.length; i++) {
                         selectField.append($("<option></option>").val(selectOptions[i].v).text(selectOptions[i].l));
